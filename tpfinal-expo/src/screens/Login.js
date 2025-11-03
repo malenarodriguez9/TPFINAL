@@ -14,6 +14,14 @@ class Login extends Component{
         }
     }
 
+    componentDidMount(){
+        auth.onAuthStateChanged(user => {
+            if(user){ 
+                console.log("Usuario ya logueado:", user.email);
+                this.props.navigation.navigate("HomeMenu");
+            }
+        });
+    }
 
     onSubmit(email, password){
         auth.signInWithEmailAndPassword(email, password)
