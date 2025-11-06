@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/config';
+import firebase from 'firebase';
 
 class CreatePost extends Component {
   constructor(props) {
@@ -29,7 +30,7 @@ class CreatePost extends Component {
       .add({
         texto: this.state.texto,
         owner: user.email,
-        createdAt: Date.now(),
+        createdAt: Date.now(), 
         likes: [],
       })
       .then(() => {

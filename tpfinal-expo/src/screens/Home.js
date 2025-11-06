@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
 import firebase from "firebase"
-import { auth } from '../firebase/config';
+import { auth, db } from '../firebase/config';
 
 class Home extends Component {
     constructor(props) {
@@ -75,7 +75,7 @@ class Home extends Component {
 
                             <Pressable
                                 onPress={() =>
-                                    this.props.navigation.navigate('Comments', { id: item.id })
+                                    this.props.navigation.navigate('ComentPost', { id: item.id })
                                 }
                             >
                                 <Text style={styles.comment}>Comentar</Text>

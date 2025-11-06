@@ -57,8 +57,8 @@ render(){
                 onChangeText= {text => this.setState({password: text})}
                 value={this.state.password}
             />
-            <Pressable onPress={() => this.onSubmit(this.state.email, this.state.password)}> 
-                <Text>Login</Text>
+            <Pressable style={styles.boton} onPress={() => this.onSubmit(this.state.email, this.state.password)}> 
+                <Text style={styles.botonTexto}>Login</Text>
             </Pressable>
 
 
