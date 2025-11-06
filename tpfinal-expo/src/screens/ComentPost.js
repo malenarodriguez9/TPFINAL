@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, FlatList } from 'react-native';
+import { View, Text, TextInput, Pressable, StyleSheet, FlatList } from 'react-native';
 import { db, auth } from '../firebase/config';
 import firebase from 'firebase';
 
@@ -64,49 +64,63 @@ class Comments extends Component {
           onChangeText={text => this.setState({ comment: text })}
         />
 
-        <Button title="Publicar comentario" onPress={() => this.agregarComentario()} />
+<Pressable style={styles.boton} onPress={() => this.agregarComentario()}>
+  <Text style={styles.botonTexto}>PUBLICAR COMENTARIO</Text>
+</Pressable>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      padding: 20,
-      backgroundColor: '#f2f2f2',
-    },
-    title: {
-      fontSize: 22,
-      marginBottom: 15,
-      fontWeight: '600',
-      textAlign: 'center',
-      color: '#333'
-    },
-    input: {
-      borderWidth: 1,
-      borderColor: '#ccc',
-      borderRadius: 10,
-      padding: 10,
-      marginTop: 15,
-      backgroundColor: '#fff'
-    },
-    commentBox: {
-      backgroundColor: '#fff',
-      borderRadius: 10,
-      padding: 10,
-      marginBottom: 10,
-      borderWidth: 1,
-      borderColor: '#e0e0e0'
-    },
-    owner: {
-      fontWeight: 'bold',
-      marginBottom: 3,
-      color: '#555'
-    },
-    texto: {
-      color: '#333'
-    }
-  });
-  
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#f2f2f2',
+  },
+  title: {
+    fontSize: 22,
+    marginBottom: 15,
+    fontWeight: '600',
+    textAlign: 'center',
+    color: '#333'
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 15,
+    backgroundColor: '#fff'
+  },
+  commentBox: {
+    backgroundColor: '#fff',
+    borderRadius: 10,
+    padding: 10,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: '#e0e0e0'
+  },
+  owner: {
+    fontWeight: 'bold',
+    marginBottom: 3,
+    color: '#555'
+  },
+  texto: {
+    color: '#333'
+  },
+  boton: {
+    backgroundColor: '#6c5ce7', // solo el botón violeta 💜
+    paddingVertical: 14,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  botonTexto: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
+
 export default Comments;
