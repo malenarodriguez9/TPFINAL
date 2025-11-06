@@ -79,7 +79,7 @@ class Profile extends Component {
                         data={this.state.posteos}
                         keyExtractor={item => item.id}
                         renderItem={({item}) =>
-                            <Text style={styles.post}>{item.data.text}</Text>
+                            <Text style={styles.post}>{item.data.texto}</Text>
                         }
                     />
                 }

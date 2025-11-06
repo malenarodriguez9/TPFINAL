@@ -59,7 +59,8 @@ class Home extends Component {
                     keyExtractor={item => item.id}
                     renderItem={({ item }) =>
                         <View style={styles.post}>
-                            <Text style={styles.user}>Usuario: {item.data.user}</Text>
+                            <Text style={styles.user}>Usuario: {item.data.owner}</Text>
+                            <Text style={styles.text}>{item.data.texto}</Text>
                             <Text>Likes: {item.data.likes.length}</Text>
 
                             {item.data.likes.includes(auth.currentUser.email) ? (
