@@ -65,9 +65,6 @@ render(){
             <Pressable style={styles.boton} onPress={() => this.props.navigation.navigate("Register")}> 
                 <Text style={styles.botonTexto}>Ir al registro</Text> 
             </Pressable>
-            <Pressable style={styles.botondos} onPress={() => this.props.navigation.navigate('HomeMenu')}> 
-                <Text style={styles.botondosTexto}>Entrar a la app</Text> 
-            </Pressable>
         </View>
     )
 }}
@@ -112,21 +109,6 @@ const styles =StyleSheet.create({
         fontSize: 17,
         fontWeight: '600',
       },
-      botondos: {
-        borderColor: '#6c5ce7',
-        borderWidth: 1.5,
-        paddingVertical: 14,
-        paddingHorizontal: 40,
-        borderRadius: 8,
-        width: '80%',
-        alignItems: 'center',
-      },
-      botondosTexto: {
-        color: '#6c5ce7',
-        fontSize: 17,
-        fontWeight: '600',
-      },
-
   })
 
 export default Login;

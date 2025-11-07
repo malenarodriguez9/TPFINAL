@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     color: '#333'
   },
   boton: {
-    backgroundColor: '#6c5ce7', // solo el botón violeta 💜
+    backgroundColor: '#6c5ce7', 
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: 'center',
