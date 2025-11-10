@@ -15,12 +15,16 @@ class Login extends Component{
     }
 
     componentDidMount(){
-        auth.onAuthStateChanged(user => {
-            if(user){ 
-                console.log("Usuario ya logueado:", user.email);
-                this.props.navigation.navigate("HomeMenu");
+        
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+              this.props.navigation.navigate('HomeMenu');
+            } else {
+              console.log('No hay usuario logueado');
             }
-        });
+          });
+        
+        
     }
 
     onSubmit(email, password){

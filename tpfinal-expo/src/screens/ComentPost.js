@@ -13,16 +13,17 @@ class Comments extends Component {
   }
 
   componentDidMount() {
-    const postId = this.props.route.params.id;
-
-    db.collection('posts')
-      .doc(postId)
-      .onSnapshot(doc => {
-        this.setState({
-          comments: doc.data().comments ? doc.data().comments : []
+      const postId = this.props.route.params.id;
+    
+      db.collection('posts')
+        .doc(postId)
+        .onSnapshot(doc => {
+          this.setState({
+            comments: doc.data().comments
+          });
         });
-      });
-  }
+      }
+  
 
   agregarComentario() {
     const postId = this.props.route.params.id;
