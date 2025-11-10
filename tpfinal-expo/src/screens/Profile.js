@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Pressable } from 'react-native';
-import firebase from "firebase"
 import { auth, db } from '../firebase/config';
+import Post from '../components/Post';
 
 class Profile extends Component {
     constructor(props) {
@@ -19,16 +19,18 @@ class Profile extends Component {
             if (user) {
                 this.setState({ email: user.email });
 
+            
                 db.collection('users')
                     .where('owner', '==', auth.currentUser.email)
                     .onSnapshot(docs => {
                         docs.forEach(doc => {
                             this.setState({
-                               user: doc.data().user
+                                user: doc.data().user
                             });
-                        })}
-                    );
+                        });
+                    });
 
+                
                 db.collection('posts')
                     .where('owner', '==', auth.currentUser.email)
                     .onSnapshot(docs => {
@@ -44,30 +46,15 @@ class Profile extends Component {
                             loading: false
                         });
                     });
+
             } else {
                 this.props.navigation.navigate('Login');
             }
-        })
+        });
     }
 
     logout() {
         auth.signOut();
-    }
-
-    likePost(id) {
-        db.collection('posts')
-            .doc(id)
-            .update({
-                likes: firebase.firestore.FieldValue.arrayUnion(auth.currentUser.email)
-            });
-    }
-
-    unlikePost(id) {
-        db.collection('posts')
-            .doc(id)
-            .update({
-                likes: firebase.firestore.FieldValue.arrayRemove(auth.currentUser.email)
-            });
     }
 
     render() {
@@ -79,41 +66,23 @@ class Profile extends Component {
 
                 <Text style={styles.subtitle}>Mis posteos:</Text>
 
-                    <FlatList
-                        data={this.state.posteos}
-                        keyExtractor={item => item.id}
-                        renderItem={({ item }) =>
-                            <View style={styles.post}>
-                                <Text style={styles.user}>Usuario: {item.data.owner}</Text>
-                                <Text style={styles.text}>{item.data.texto}</Text>
-                                <Text>Likes: {item.data.likes.length}</Text>
-
-                                {item.data.likes.includes(auth.currentUser.email) ? (
-                                    <Pressable onPress={() => this.unlikePost(item.id)}>
-                                        <Text style={styles.unlike}>Unlike</Text>
-                                    </Pressable>
-                                ) : (
-                                    <Pressable onPress={() => this.likePost(item.id)}>
-                                        <Text style={styles.like}>Like</Text>
-                                    </Pressable>
-                                )}
-
-                                <Pressable
-                                    onPress={() =>
-                                        this.props.navigation.navigate('ComentPost', { id: item.id })
-                                    }
-                                >
-                                    <Text style={styles.comment}>Comentar</Text>
-                                </Pressable>
-                            </View>
-                        }
-                    />
+                <FlatList
+                    data={this.state.posteos}
+                    keyExtractor={(item) => item.id}
+                    renderItem={({ item }) =>
+                        <Post
+                            id={item.id}
+                            data={item.data}
+                            navigation={this.props.navigation}
+                        />
+                    }
+                />
 
                 <Pressable style={styles.boton} onPress={() => this.logout()}>
                     <Text style={styles.botonTexto}>Logout</Text>
                 </Pressable>
             </View>
-        )
+        );
     }
 }
 
@@ -142,29 +111,6 @@ const styles = StyleSheet.create({
         color: '#222',
         marginTop: 24,
         marginBottom: 12,
-    },
-    post: {
-        borderWidth: 1,
-        borderColor: '#ddd',
-        borderRadius: 10,
-        padding: 15,
-        marginBottom: 15
-    },
-    user: {
-        fontWeight: 'bold',
-        marginBottom: 5
-    },
-    like: {
-        color: 'green',
-        marginTop: 5
-    },
-    unlike: {
-        color: 'red',
-        marginTop: 5
-    },
-    comment: {
-        color: 'blue',
-        marginTop: 10
     },
     boton: {
         backgroundColor: '#6c5ce7',

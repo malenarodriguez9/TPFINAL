@@ -1,4 +1,3 @@
- // CreatePost.js
 import React, { Component } from 'react';
 import { View, Text, TextInput, Pressable, StyleSheet } from 'react-native';
 import { db, auth } from '../firebase/config';
@@ -15,12 +14,7 @@ class CreatePost extends Component {
 
   crearPost() {
     const user = auth.currentUser;
-
-    if (!user) {
-      this.setState({ mensaje: 'Tenés que estar logueado para crear un post.' });
-      return;
-    }
-
+    
     if (this.state.texto === '') {
       this.setState({ mensaje: 'El post no puede estar vacío.' });
       return;
