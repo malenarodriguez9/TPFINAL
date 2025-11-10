@@ -21,21 +21,13 @@ class Profile extends Component {
 
                 db.collection('users')
                     .where('owner', '==', auth.currentUser.email)
-                    .limit(1)
                     .onSnapshot(docs => {
-                        let usuarios = [];
                         docs.forEach(doc => {
-                            usuarios.push({
-                                id: doc.id,
-                                data: doc.data()
-                            })
-                        });
-                        if (usuarios.length > 0) {
                             this.setState({
-                                user: usuarios[0].data.user,
+                               user: doc.data().user
                             });
-                        }
-                    });
+                        })}
+                    );
 
                 db.collection('posts')
                     .where('owner', '==', auth.currentUser.email)
@@ -87,9 +79,6 @@ class Profile extends Component {
 
                 <Text style={styles.subtitle}>Mis posteos:</Text>
 
-                {this.state.loading ? (
-                    <Text>Cargando...</Text>
-                ) : (
                     <FlatList
                         data={this.state.posteos}
                         keyExtractor={item => item.id}
@@ -119,7 +108,6 @@ class Profile extends Component {
                             </View>
                         }
                     />
-                )}
 
                 <Pressable style={styles.boton} onPress={() => this.logout()}>
                     <Text style={styles.botonTexto}>Logout</Text>

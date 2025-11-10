@@ -32,6 +32,7 @@ class CreatePost extends Component {
         owner: user.email,
         createdAt: Date.now(), 
         likes: [],
+        comments: []
       })
       .then(() => {
         this.setState({
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 20,
     justifyContent: 'center',
-    backgroundColor: '#f2f2f2', // fondo claro, no violeta
+    backgroundColor: '#f2f2f2', 
   },
   titulo: {
     fontSize: 22,
@@ -95,14 +96,14 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   boton: {
-    backgroundColor: '#6c5ce7', // violeta
+    backgroundColor: '#6c5ce7', 
     paddingVertical: 14,
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 10,
   },
   botonTexto: {
-    color: '#fff', // texto blanco
+    color: '#fff', 
     fontSize: 16,
     fontWeight: 'bold',
   },
